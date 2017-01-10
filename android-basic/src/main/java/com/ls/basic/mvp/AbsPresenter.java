@@ -31,9 +31,9 @@ public abstract class AbsPresenter<V extends BaseView> implements BasePresenter 
     protected final V mView;
 
     @NonNull
-    private final BaseSchedulerProvider mSchedulerProvider;
+    protected final BaseSchedulerProvider mSchedulerProvider;
     @NonNull
-    private CompositeSubscription mSubscriptions;
+    protected CompositeSubscription mSubscriptions;
 
     public AbsPresenter(@NonNull V mView, @NonNull BaseSchedulerProvider schedulerProvider) {
         this.mView = mView;
