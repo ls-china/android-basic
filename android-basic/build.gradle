@@ -9,7 +9,7 @@ android {
         minSdkVersion 11
         targetSdkVersion 25
         versionCode 1
-        versionName "1.0"
+        versionName "0.0.2"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -31,8 +31,8 @@ dependencies {
     //quicksidebar
     compile 'com.bigkoo:quicksidebar:1.0.3'
     // rxjava
+    compile 'io.reactivex:rxjava:1.2.3'
     compile 'io.reactivex:rxandroid:1.2.1'
-    compile 'io.reactivex:rxjava:1.1.8'
 //    compile 'io.reactivex:rxjava-math:1.0.0'
     // okhttp3
     compile 'com.squareup.okhttp3:logging-interceptor:3.5.0'
