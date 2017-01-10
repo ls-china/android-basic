@@ -1,13 +1,12 @@
 package com.ls.basic.ui.adapter;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.ls.basic.ui.viewholder.FrameViewHolder;
+import com.ls.basic.ui.viewholder.ViewHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,27 +17,40 @@ public abstract class AbsListViewAdapter<E> extends BaseAdapter {
     protected ArrayList<E> datas;
 
     public AbsListViewAdapter(Context context) {
-        datas = new ArrayList<E>(0);
+        this(context, null);
+    }
+
+    public AbsListViewAdapter(Context context, ArrayList<E> datas) {
         this.context = context;
+        this.datas = datas;
+        if (null == datas) {
+            datas = new ArrayList<E>(0);
+        }
         layoutInflater = LayoutInflater.from(context);
     }
 
     public void addList(List<E> list) {
+        if (null == list || list.size() <= 0) {
+            return;
+        }
         datas.addAll(list);
     }
 
-    public void add(E... items) {
-        if (null != items) {
-            for (E e : items) {
-                addSingle(e);
-            }
+    @SafeVarargs
+    public final void add(E... items) {
+        if (null == items) {
+            return;
+        }
+        for (E e : items) {
+            addSingle(e);
         }
     }
 
     public void addSingle(E item) {
-        if (null != item) {
-            datas.add(item);
+        if (null == item) {
+            return;
         }
+        datas.add(item);
     }
 
     public int getCount() {
@@ -66,31 +78,25 @@ public abstract class AbsListViewAdapter<E> extends BaseAdapter {
     }
 
     @Override
+    public boolean isEnabled(int position) {
+        return position < datas.size();
+    }
+
+    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        int viewType = getItemViewType(position);
-        ViewHolder holder = null;
-        if (convertView == null) {
-            convertView = layoutInflater.inflate(
-                    getContentViewResIdByType(viewType), parent, false);
-            holder = new ViewHolder(convertView);
-            convertView.setTag(holder);
-        } else {
-            holder = (ViewHolder) convertView.getTag();
-        }
-        onBindViewHolder(holder, position);
-        return convertView;
+        ViewHelper holder = ViewHelper.getForListView(context, convertView, parent, getLayoutResId());
+        convert(holder, getItem(position), position);
+        return holder.getView();
     }
 
-    public abstract int getContentViewResIdByType(int viewType);
+    protected abstract int getLayoutResId();
 
-    public abstract void onBindViewHolder(ViewHolder holder, int position);
+    /**
+     * Implement this method and use the helper to adapt the view to the given item.
+     *
+     * @param helper A fully initialized helper.
+     * @param item   The item that needs to be displayed.
+     */
+    protected abstract void convert(ViewHelper helper, E item, int position);
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        public FrameViewHolder viewToucher;
-
-        public ViewHolder(View view) {
-            super(view);
-            viewToucher = new FrameViewHolder(view);
-        }
-    }
 }
