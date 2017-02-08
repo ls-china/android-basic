@@ -9,8 +9,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import static android.R.attr.name;
-
 /**
  * Created by hx on 2016/3/21.
  */
@@ -24,10 +22,14 @@ public abstract class FileUtils {
      * @param toDir    指定目录
      * @return
      */
-    public static String copyAssetsFileToDir(Context context, String pathName, String toDir) throws IOException {
-        String toFile = toDir + File.separator + name;
+    public static String copyAssetsFileToDir(Context context, String pathName, String toDir, String toName) throws IOException {
+        return copyAssetsFileToDir(context, pathName, toDir + File.separator + toName);
+    }
+
+    public static String copyAssetsFileToDir(Context context, String pathName, String toPathName) throws IOException {
         InputStream is = context.getAssets().open(pathName);
-        File fileDir = new File(toDir);
+        File toFile = new File(toPathName);
+        File fileDir = toFile.getParentFile();
         if (!fileDir.exists()) {
             fileDir.mkdirs();
         }
@@ -45,7 +47,7 @@ public abstract class FileUtils {
         if (null != exception) {
             throw exception;
         }
-        return toFile;
+        return toFile.getAbsolutePath();
     }
 
     /**
