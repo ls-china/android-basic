@@ -22,8 +22,8 @@ public class QuickSidebarActivity extends BaseActivity<QuickSidebarPresent> impl
     LineSidebarRecylerView lineSidebarRecylerView;
 
     @Override
-    protected void initPresenter() {
-        new QuickSidebarPresent(this, SchedulerProvider.getInstance());
+    protected QuickSidebarPresent initPresenter() {
+        return new QuickSidebarPresent(this, SchedulerProvider.getInstance());
     }
 
     @Override

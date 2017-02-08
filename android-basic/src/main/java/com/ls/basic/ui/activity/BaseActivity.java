@@ -16,7 +16,10 @@ import butterknife.ButterKnife;
 public abstract class BaseActivity<P extends AbsPresenter> extends AppCompatActivity {
     protected P mPresenter;
 
-    protected abstract void initPresenter();
+    protected void initView() {
+    }
+
+    protected abstract P initPresenter();
 
     /**
      * set layout of this activity
@@ -31,7 +34,8 @@ public abstract class BaseActivity<P extends AbsPresenter> extends AppCompatActi
         RxBus.get().register(this);
         setContentView(getLayout());
         ButterKnife.bind(this);
-        initPresenter();
+        initView();
+        mPresenter = initPresenter();
         if (mPresenter == null) {
             throw new IllegalStateException("please init mPresenter in initPresenter() method ");
         }
