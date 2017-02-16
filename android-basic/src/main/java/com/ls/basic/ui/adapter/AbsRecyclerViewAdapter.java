@@ -64,8 +64,11 @@ public abstract class AbsRecyclerViewAdapter<E, VH extends RecylerViewHolder> ex
         datas.clear();
     }
 
-    public void remove(int index) {
-        datas.remove(index);
+    public E remove(int position) {
+        if (position > 0 && position < datas.size()) {
+            return datas.remove(position);
+        }
+        return null;
     }
 
     public void remove(E e) {
@@ -73,7 +76,10 @@ public abstract class AbsRecyclerViewAdapter<E, VH extends RecylerViewHolder> ex
     }
 
     public E getItem(int position) {
-        return datas.get(position);
+        if (position > 0 && position < datas.size()) {
+            return datas.get(position);
+        }
+        return null;
     }
 
     @Override

@@ -160,7 +160,7 @@ public class ViewHelper {
     }
 
     @SuppressWarnings("unchecked")
-    private <T extends View> T retrieveView(int viewId) {
+    public <T extends View> T retrieveView(int viewId) {
         View view = views.get(viewId);
         if (view == null) {
             view = convertView.findViewById(viewId);
