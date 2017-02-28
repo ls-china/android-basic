@@ -1,10 +1,13 @@
 package com.hwangjr.rxbus.thread;
 
+import android.os.Handler;
+
 import java.util.concurrent.Executor;
 
-import rx.Scheduler;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import io.reactivex.Scheduler;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+
 
 public enum EventThread {
     /**
@@ -15,7 +18,7 @@ public enum EventThread {
     /**
      * Creates and returns a {@link Scheduler} that creates a new {@link Thread} for each unit of work.
      * <p/>
-     * Unhandled errors will be delivered to the scheduler Thread's {@link java.lang.Thread.UncaughtExceptionHandler}.
+     * Unhandled errors will be delivered to the scheduler Thread's {@link Thread.UncaughtExceptionHandler}.
      */
     NEW_THREAD,
 
@@ -28,7 +31,7 @@ public enum EventThread {
      * <p/>
      * Do not perform computational work on this scheduler. Use computation() instead.
      * <p/>
-     * Unhandled errors will be delivered to the scheduler Thread's {@link java.lang.Thread.UncaughtExceptionHandler}.
+     * Unhandled errors will be delivered to the scheduler Thread's {@link Thread.UncaughtExceptionHandler}.
      */
     IO,
 
@@ -39,7 +42,7 @@ public enum EventThread {
      * <p/>
      * Do not perform IO-bound work on this scheduler. Use io() instead.
      * <p/>
-     * Unhandled errors will be delivered to the scheduler Thread's {@link java.lang.Thread.UncaughtExceptionHandler}.
+     * Unhandled errors will be delivered to the scheduler Thread's {@link Thread.UncaughtExceptionHandler}.
      */
     COMPUTATION,
 
@@ -52,12 +55,18 @@ public enum EventThread {
     /**
      * Creates and returns a {@link Scheduler} that executes work immediately on the current thread.
      */
-    IMMEDIATE,
+//    IMMEDIATE,
 
     /**
      * Converts an {@link Executor} into a new Scheduler instance.
      */
-    EXECUTOR;
+    EXECUTOR,
+
+    /**
+     * {@link Scheduler} which uses the provided {@link Handler} to execute actions.
+     */
+//    HANDLER
+    ;
 
     public static Scheduler getScheduler(EventThread thread) {
         Scheduler scheduler;
@@ -77,12 +86,15 @@ public enum EventThread {
             case TRAMPOLINE:
                 scheduler = Schedulers.trampoline();
                 break;
-            case IMMEDIATE:
-                scheduler = Schedulers.immediate();
-                break;
+//            case IMMEDIATE:
+//                scheduler = Schedulers.immediate();
+//                break;
             case EXECUTOR:
                 scheduler = Schedulers.from(ThreadHandler.DEFAULT.getExecutor());
                 break;
+//            case HANDLER:
+//                scheduler = HandlerScheduler.from(ThreadHandler.DEFAULT.getHandler());
+//                break;
             default:
                 scheduler = AndroidSchedulers.mainThread();
                 break;

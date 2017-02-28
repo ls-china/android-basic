@@ -17,7 +17,7 @@ public abstract class FileUtils {
     /**
      * 复制assets/skin目录下的皮肤文件到指定目录
      *
-     * @param context  the context
+     * @param context  the mContext
      * @param pathName file path and name
      * @param toDir    指定目录
      * @return

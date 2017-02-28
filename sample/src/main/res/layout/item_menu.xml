@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/padding_margin_sm"
+    android:foreground="?attr/selectableItemBackground"
+    android:orientation="vertical"
+    app:cardBackgroundColor="@android:color/white"
+    app:cardPreventCornerOverlap="true"
+    app:cardUseCompatPadding="true"
+    app:contentPadding="@dimen/padding_margin_sm">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@android:id/title"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size"
+            android:orientation="horizontal"
+            android:padding="@dimen/padding_margin"
+            android:text="@string/test"
+            android:textSize="@dimen/text_size" />
+
+        <TextView
+            android:id="@android:id/text1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lines="1"
+            android:maxLines="10"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/padding_margin_sm"
+            android:paddingLeft="@dimen/padding_margin"
+            android:paddingRight="@dimen/padding_margin"
+            android:paddingTop="@dimen/padding_margin_sm"
+            android:text="@string/test"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="@dimen/text_size_sm" />
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

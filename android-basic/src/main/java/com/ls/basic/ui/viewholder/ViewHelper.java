@@ -2,18 +2,25 @@ package com.ls.basic.ui.viewholder;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.annotation.ColorInt;
+import android.support.annotation.ColorRes;
+import android.support.annotation.DrawableRes;
 import android.text.util.Linkify;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
+import android.widget.Checkable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 public class ViewHelper {
     private View convertView;
@@ -32,7 +39,7 @@ public class ViewHelper {
     /**
      * This method is the only entry point to get a BaseAdapterHelper.
      *
-     * @param context     The current context.
+     * @param context     The current mContext.
      * @param convertView the convertView arg passed to the getView() method.
      * @param parent      the parent arg passed to the getView() method.
      * @return A BaseAdapterHelper instance.
@@ -56,6 +63,30 @@ public class ViewHelper {
     public ViewHelper setText(int viewId, String value) {
         TextView view = retrieveView(viewId);
         view.setText(value);
+        return this;
+    }
+
+    public ViewHelper setTextColor(int viewId, @ColorInt int color) {
+        TextView view = retrieveView(viewId);
+        view.setTextColor(color);
+        return this;
+    }
+
+    public ViewHelper setTextColorRes(int viewId, @ColorRes int colorRes) {
+        TextView view = retrieveView(viewId);
+        view.setTextColor(context.getResources().getColor(colorRes));
+        return this;
+    }
+
+    public ViewHelper setBackgroundColor(int viewId, int color) {
+        View view = retrieveView(viewId);
+        view.setBackgroundColor(color);
+        return this;
+    }
+
+    public ViewHelper setBackgroundColorRes(int viewId, int colorRes) {
+        View view = retrieveView(viewId);
+        view.setBackgroundResource(colorRes);
         return this;
     }
 
@@ -85,6 +116,11 @@ public class ViewHelper {
         return this;
     }
 
+    public ViewHelper setImageDrawableRes(int viewId, @DrawableRes int drawableRes) {
+        Drawable drawable = context.getResources().getDrawable(drawableRes);
+        return setImageDrawable(viewId, drawable);
+    }
+
     /**
      * Will download an image from a URL and put it in an ImageView.<br/>
      * It uses Square's Picasso library to download the image asynchronously and put the result into the ImageView.<br/>
@@ -100,6 +136,13 @@ public class ViewHelper {
         Glide.with(context).load(imageUrl).into(view);
         return this;
     }
+
+    public ViewHelper setGifUrl(int viewId, String imageUrl) {
+        ImageView view = retrieveView(viewId);
+        Glide.with(context).load(imageUrl).asGif().diskCacheStrategy(DiskCacheStrategy.SOURCE).into(view);
+        return this;
+    }
+
 
     /**
      * Add an action to set the image of an image view. Can be called multiple times.
@@ -135,8 +178,48 @@ public class ViewHelper {
      * @return The ViewHelper for chaining.
      */
     public ViewHelper setVisible(int viewId, boolean visible) {
-        ImageView view = retrieveView(viewId);
+        View view = retrieveView(viewId);
         view.setVisibility(visible ? View.VISIBLE : View.GONE);
+        return this;
+    }
+
+    public ViewHelper setTag(int viewId, Object tag) {
+        View view = retrieveView(viewId);
+        view.setTag(tag);
+        return this;
+    }
+
+    public ViewHelper setTag(int viewId, int key, Object tag) {
+        View view = retrieveView(viewId);
+        view.setTag(key, tag);
+        return this;
+    }
+
+    public ViewHelper setChecked(int viewId, boolean checked) {
+        Checkable view = retrieveView(viewId);
+        view.setChecked(checked);
+        return this;
+    }
+
+    public ViewHelper setTypeface(int viewId, Typeface typeface) {
+        TextView view = retrieveView(viewId);
+        view.setTypeface(typeface);
+        view.setPaintFlags(view.getPaintFlags() | Paint.SUBPIXEL_TEXT_FLAG);
+        return this;
+    }
+
+    public ViewHelper setTypeface(Typeface typeface, int... viewIds) {
+        for (int viewId : viewIds) {
+            TextView view = retrieveView(viewId);
+            view.setTypeface(typeface);
+            view.setPaintFlags(view.getPaintFlags() | Paint.SUBPIXEL_TEXT_FLAG);
+        }
+        return this;
+    }
+
+    public ViewHelper setOnClickListener(int viewId, View.OnClickListener listener) {
+        View view = retrieveView(viewId);
+        view.setOnClickListener(listener);
         return this;
     }
 

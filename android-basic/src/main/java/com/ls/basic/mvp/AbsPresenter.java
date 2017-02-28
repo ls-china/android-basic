@@ -19,34 +19,46 @@
 
 package com.ls.basic.mvp;
 
-import android.support.annotation.NonNull;
 
-import com.ls.basic.utils.RxUtils;
-import com.ls.basic.utils.schedulers.BaseSchedulerProvider;
+import android.os.Bundle;
 
-import rx.subscriptions.CompositeSubscription;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 
 
-public abstract class AbsPresenter<V extends BaseView> implements BasePresenter {
-    protected final V mView;
+public abstract class AbsPresenter implements BasePresenter {
+    protected CompositeDisposable mCompositeDisposable;
 
-    @NonNull
-    protected final BaseSchedulerProvider mSchedulerProvider;
-    @NonNull
-    protected CompositeSubscription mSubscriptions;
+    protected void addSubscrebe(Disposable subscription) {
+        if (mCompositeDisposable == null) {
+            mCompositeDisposable = new CompositeDisposable();
+        }
+        mCompositeDisposable.add(subscription);
+    }
 
-    public AbsPresenter(@NonNull V mView, @NonNull BaseSchedulerProvider schedulerProvider) {
-        this.mView = mView;
-        mSchedulerProvider = schedulerProvider;
-        mSubscriptions = RxUtils.getNewCompositeSubIfUnsubscribed(mSubscriptions);
-        this.mView.setPresenter(this);
+    protected void removeSubscrebe(Disposable subscription) {
+        if (mCompositeDisposable == null) {
+            return;
+        }
+        mCompositeDisposable.remove(subscription);
     }
 
     @Override
-    public void unsubscribe() {
-        if (null != mSubscriptions) {
-            mSubscriptions.clear();
+    public void detachView() {
+        if (null != mCompositeDisposable && !mCompositeDisposable.isDisposed()) {
+            mCompositeDisposable.dispose();
+            mCompositeDisposable.clear();
+            mCompositeDisposable = null;
         }
-        RxUtils.unsubscribeIfNotNull(mSubscriptions);
+    }
+
+    @Override
+    public void onRestoreSavedInstanceState(Bundle savedInstanceState) {
+
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+
     }
 }

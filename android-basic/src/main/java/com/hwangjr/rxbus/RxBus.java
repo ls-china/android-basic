@@ -1,6 +1,5 @@
 package com.hwangjr.rxbus;
 
-import com.hwangjr.rxbus.entity.SubscriberEvent;
 import com.hwangjr.rxbus.thread.ThreadEnforcer;
 
 /**
@@ -25,5 +24,4 @@ public class RxBus {
         }
         return sBus;
     }
-
 }

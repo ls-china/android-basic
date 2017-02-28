@@ -84,7 +84,7 @@ public class AndroidUtil {
     /**
      * get app version info
      *
-     * @param context context
+     * @param context mContext
      * @return app version info if occur exception return unknow
      */
     public static String getAppVersion(Context context) {

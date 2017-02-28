@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">core</string>
+    <string name="app_name">Sample</string>
+    <string name="test">test</string>
+    <string name="menu1">Menu1</string>
+    <string name="menu2">Menu2</string>
+    <string name="search">search</string>
 </resources>
