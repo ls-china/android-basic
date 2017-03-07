@@ -1,4 +1,6 @@
 ### android-basic 安卓应用基础库 ###
+[![](https://jitpack.io/v/ls-china/android-basic.svg)](https://jitpack.io/#ls-china/android-basic)
+
 包含内容
 - Dagger2
 - glide
