@@ -16,15 +16,13 @@
 
 package com.ls.basic.mvp;
 
-import android.os.Bundle;
+
+import android.content.Context;
 
 public interface BasePresenter {
 
-    void start();
+    void onAttach(Context context);
 
     void detachView();
 
-    void onRestoreSavedInstanceState(Bundle savedInstanceState);
-
-    void onSaveInstanceState(Bundle outState);
 }

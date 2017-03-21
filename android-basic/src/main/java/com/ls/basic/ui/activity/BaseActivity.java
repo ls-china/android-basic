@@ -9,14 +9,14 @@ import android.view.WindowManager;
 
 import com.hwangjr.rxbus.RxBus;
 import com.ls.basic.R;
+import com.ls.basic.mvp.BaseView;
 
 import butterknife.ButterKnife;
 
 /**
- * Created by hx on 2016/12/27.
- * core - com.ls.basic.ui.activity
+ * Created by hx on 2016/12/27. <a href="https://github.com/China-ls">GitHub</a>
  */
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity implements BaseView {
     protected Toolbar mCommonToolbar;
 
     /**

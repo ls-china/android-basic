@@ -16,7 +16,6 @@ import java.util.ArrayList;
 
 import butterknife.Bind;
 
-import static com.ls.sample.R.id.recyclerView;
 
 /**
  * Created by hx on 2017/2/28.
@@ -28,7 +27,7 @@ public class CollapsingToolbarActivity extends BaseActivity {
     protected CollapsingToolbarLayout collapsingToolbarLayout;
     @Bind(R.id.image)
     protected ImageView ivImage;
-    @Bind(recyclerView)
+    @Bind(R.id.recyclerView)
     protected RecyclerView mRecyclerView;
     private AbsRecyclerViewAdapter<String> mAapter;
 

@@ -19,7 +19,7 @@ public interface MainConst {
 
     }
 
-    public interface View extends BaseView<MainConst.Present> {
+    public interface View extends BaseView {
 
         void addMenus(List<Menu> menus);
 

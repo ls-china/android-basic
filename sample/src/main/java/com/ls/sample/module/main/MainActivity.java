@@ -30,11 +30,6 @@ public class MainActivity extends BaseActivity implements MainConst.View, AbsRec
     MainPresenter mMainPresenter;
 
     @Override
-    public void setPresenter(MainConst.Present presenter) {
-
-    }
-
-    @Override
     protected int getLayoutId() {
         return R.layout.act_main;
     }

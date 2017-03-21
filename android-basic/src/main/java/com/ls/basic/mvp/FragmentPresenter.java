@@ -16,6 +16,13 @@
 
 package com.ls.basic.mvp;
 
-public interface BaseView {
+import android.os.Bundle;
 
+public interface FragmentPresenter extends BasePresenter {
+
+    void start();
+
+    void onRestoreSavedInstanceState(Bundle savedInstanceState);
+
+    void onSaveInstanceState(Bundle outState);
 }

@@ -20,8 +20,6 @@
 package com.ls.basic.mvp;
 
 
-import android.os.Bundle;
-
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
@@ -44,6 +42,11 @@ public abstract class AbsPresenter implements BasePresenter {
     }
 
     @Override
+    public void onAttach() {
+
+    }
+
+    @Override
     public void detachView() {
         if (null != mCompositeDisposable && !mCompositeDisposable.isDisposed()) {
             mCompositeDisposable.dispose();
@@ -52,13 +55,4 @@ public abstract class AbsPresenter implements BasePresenter {
         }
     }
 
-    @Override
-    public void onRestoreSavedInstanceState(Bundle savedInstanceState) {
-
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-
-    }
 }

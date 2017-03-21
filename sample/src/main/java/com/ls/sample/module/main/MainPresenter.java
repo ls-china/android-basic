@@ -31,11 +31,6 @@ public class MainPresenter extends AbsPresenter implements MainConst.Present {
     }
 
     @Override
-    public void start() {
-
-    }
-
-    @Override
     public void getMenus() {
         Observable.just(
                 Arrays.asList(

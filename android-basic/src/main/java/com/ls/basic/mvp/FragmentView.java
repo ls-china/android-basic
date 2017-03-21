@@ -16,6 +16,8 @@
 
 package com.ls.basic.mvp;
 
-public interface BaseView {
+public interface FragmentView<T extends FragmentPresenter> extends BaseView {
+
+    void setPresenter(T presenter);
 
 }
