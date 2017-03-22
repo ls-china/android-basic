@@ -42,7 +42,7 @@ public abstract class AbsPresenter implements BasePresenter {
     }
 
     @Override
-    public void onAttach() {
+    public void onAttach(Context context) {
 
     }
 
