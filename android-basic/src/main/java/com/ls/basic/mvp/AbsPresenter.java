@@ -20,6 +20,8 @@
 package com.ls.basic.mvp;
 
 
+import android.content.Context;
+
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
@@ -42,7 +44,7 @@ public abstract class AbsPresenter implements BasePresenter {
     }
 
     @Override
-    public void onAttach() {
+    public void onAttach(Context context) {
 
     }
 

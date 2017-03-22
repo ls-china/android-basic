@@ -2,7 +2,7 @@ package com.ls.sample.module.tablayout.picture;
 
 import android.os.Bundle;
 
-import com.ls.basic.mvp.AbsPresenter;
+import com.ls.basic.mvp.AbsFragmentPresenter;
 import com.ls.sample.constants.DataConstants;
 import com.ls.sample.data.Api;
 import com.ls.sample.data.resp.ImageSoResponse;
@@ -22,7 +22,7 @@ import io.reactivex.schedulers.Schedulers;
  * <a href="https://github.com/China-ls">GitHub</a>
  */
 
-public class PicturePresenter extends AbsPresenter implements PictureConstrant.Presenter {
+public class PicturePresenter extends AbsFragmentPresenter implements PictureConstrant.Presenter {
     private PictureConstrant.View mView;
     private Api api;
     private int sn;
